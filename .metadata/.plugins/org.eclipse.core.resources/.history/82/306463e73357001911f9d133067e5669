@@ -1,0 +1,9 @@
+package kr.hs.emirim.mathematics;
+
+public class Mathematics {
+
+	public static void main(String[] args) {
+		
+	}
+
+}
