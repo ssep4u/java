@@ -23,6 +23,8 @@ public class GUI2_Components {
         cbox0.addItem("옥주현");
         cbox0.addItem("이진");
 
+        JLabel lbResult = new JLabel("Result");
+
         bt0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -39,6 +41,7 @@ public class GUI2_Components {
         panel.add(tf0);
         panel.add(ta0);
         panel.add(cbox0);
+        panel.add(lbResult);
 
         frame.add(panel);
 
