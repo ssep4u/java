@@ -1,7 +1,11 @@
+import com.sun.nio.sctp.MessageInfo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class GUI2_Components {
     public static void main(String[] args) {
@@ -38,10 +42,49 @@ public class GUI2_Components {
                 result += tf0.getText();
                 result += ta0.getText();
                 result += cbox0.getSelectedItem();
+//                result += cbox0.getItemAt(cbox0.getSelectedIndex());
 
                 lbResult.setText(result);
             }
         });
+        ItemListener il = new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getSource() == cb0) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        System.out.println(cb0.getText() + ": checked");
+                    } else {
+                        System.out.println(cb0.getText() + ": unchecked");
+                    }
+                } else if (e.getSource() == cb1) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        System.out.println(cb1.getText() + ": checked");
+                    } else {
+                        System.out.println(cb1.getText() + ": unchecked");
+                    }
+                } else if (e.getSource() == rb0) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        System.out.println(rb0.getText() + ": checked");
+                    } else {
+                        System.out.println(rb0.getText() + ": unchecked");
+                    }
+                } else if (e.getSource() == rb1) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        System.out.println(rb1.getText() + ": checked");
+                    } else {
+                        System.out.println(rb1.getText() + ": unchecked");
+                    }
+                }  else if (e.getSource() == cbox0) {
+                    System.out.println(cbox0.getSelectedItem());
+                }
+
+            }
+        };
+        cb0.addItemListener(il);
+        cb1.addItemListener(il);
+        rb0.addItemListener(il);
+        rb1.addItemListener(il);
+        cbox0.addItemListener(il);
 
         panel.add(lb0);
         panel.add(bt0);
