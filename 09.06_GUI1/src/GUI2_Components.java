@@ -27,7 +27,10 @@ public class GUI2_Components {
         cbox0.addItem("옥주현");
         cbox0.addItem("이진");
 
+        JDialog dialog = new JDialog(frame, "다이얼로그");
+        dialog.setSize(300, 100);
         JLabel lbResult = new JLabel("Result");
+        dialog.add(lbResult);
 
         bt0.addActionListener(new ActionListener() {
             @Override
@@ -45,6 +48,8 @@ public class GUI2_Components {
 //                result += cbox0.getItemAt(cbox0.getSelectedIndex());
 
                 lbResult.setText(result);
+
+                dialog.setVisible(true);
             }
         });
         ItemListener il = new ItemListener() {
@@ -95,7 +100,7 @@ public class GUI2_Components {
         panel.add(tf0);
         panel.add(ta0);
         panel.add(cbox0);
-        panel.add(lbResult);
+//        panel.add(lbResult);
 
         frame.add(panel);
 
