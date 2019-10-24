@@ -12,15 +12,37 @@ public class GUI11_주민번호테스터 {
         JTextField tf0 = new JTextField(10);
         JLabel lb = new JLabel("-");
         JTextField tf1 = new JTextField(10);
-        JButton btTest = new JButton("테스트");
+//        JButton btTest = new JButton("테스트");
 
-        btTest.addActionListener(new ActionListener() {
+//        btTest.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (isGood(tf0.getText() + tf1.getText())) {
+//                    lb.setText("O");
+//                } else {
+//                    lb.setText("X");
+//                }
+//            }
+//        });
+        tf0.addKeyListener(new KeyAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (isGood(tf0.getText() + tf1.getText())) {
-                    lb.setText("O");
-                } else {
-                    lb.setText("X");
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+                if (tf0.getText().length() == 6) {
+                    tf1.requestFocus();
+                }
+            }
+        });
+        tf1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+                if (tf1.getText().length() == 7) {
+                    if (isGood(tf0.getText() + tf1.getText())) {
+                        lb.setText("O");
+                    } else {
+                        lb.setText("X");
+                    }
                 }
             }
         });
@@ -28,7 +50,7 @@ public class GUI11_주민번호테스터 {
         panel.add(tf0);
         panel.add(lb);
         panel.add(tf1);
-        panel.add(btTest);
+//        panel.add(btTest);
         frame.add(panel);
 
         frame.setPreferredSize(new Dimension(600, 400));
