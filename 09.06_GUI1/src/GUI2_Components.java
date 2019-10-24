@@ -1,11 +1,6 @@
-import com.sun.nio.sctp.MessageInfo;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 public class GUI2_Components {
     public static void main(String[] args) {
@@ -27,62 +22,48 @@ public class GUI2_Components {
         cbox0.addItem("옥주현");
         cbox0.addItem("이진");
 
-        JDialog dialog = new JDialog(frame, "다이얼로그");
-        dialog.setSize(300, 100);
         JLabel lbResult = new JLabel("Result");
-        dialog.add(lbResult);
+
+        cb1.setSelected(true);
+        rb0.setSelected(true);
+        tf0.setText("전화번호를 입력하세요.");
+        tf0.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {        //관심받기
+                if(tf0.getText().equals("전화번호를 입력하세요.")) {
+                    tf0.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {          //관심잃기
+                if (tf0.getText().equals("")) {
+                    tf0.setText("전화번호를 입력하세요.");
+                }
+            }
+        });
 
         bt0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String result = "";
-                result += lb0.getText();
-                result += bt0.getText();
-                result += cb0.isSelected();
-                result += cb1.isSelected();
-                result += rb0.isSelected();
-                result += rb1.isSelected();
-                result += tf0.getText();
-                result += ta0.getText();
-                result += cbox0.getSelectedItem();
-//                result += cbox0.getItemAt(cbox0.getSelectedIndex());
-
-                lbResult.setText(result);
-
-                dialog.setVisible(true);
+                showResult(lb0, bt0, cb0, cb1, rb0, rb1, tf0, ta0, cbox0, lbResult);
             }
         });
         ItemListener il = new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (e.getSource() == cb0) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        System.out.println(cb0.getText() + ": checked");
-                    } else {
-                        System.out.println(cb0.getText() + ": unchecked");
-                    }
-                } else if (e.getSource() == cb1) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        System.out.println(cb1.getText() + ": checked");
-                    } else {
-                        System.out.println(cb1.getText() + ": unchecked");
-                    }
-                } else if (e.getSource() == rb0) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        System.out.println(rb0.getText() + ": checked");
-                    } else {
-                        System.out.println(rb0.getText() + ": unchecked");
-                    }
-                } else if (e.getSource() == rb1) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        System.out.println(rb1.getText() + ": checked");
-                    } else {
-                        System.out.println(rb1.getText() + ": unchecked");
-                    }
-                }  else if (e.getSource() == cbox0) {
-                    System.out.println(cbox0.getSelectedItem());
-                }
-
+                showResult(lb0, bt0, cb0, cb1, rb0, rb1, tf0, ta0, cbox0, lbResult);
+//                if(e.getSource() == cb0) {
+//                    System.out.println("JCheckbox0 : "+cb0.isSelected());
+//                } else if(e.getSource() == cb1) {
+//                    System.out.println("JCheckbox1 : "+cb1.isSelected());
+//                } else if(e.getSource() == rb0) {
+//                    System.out.println("미성년자 : "+rb0.isSelected());
+//                } else if (e.getSource() == rb1) {
+//                    System.out.println("성인 : "+rb1.isSelected());
+//                } else if (e.getSource() == cbox0) {
+//                    System.out.println(cbox0.getSelectedItem());
+//                }
             }
         };
         cb0.addItemListener(il);
@@ -90,6 +71,19 @@ public class GUI2_Components {
         rb0.addItemListener(il);
         rb1.addItemListener(il);
         cbox0.addItemListener(il);
+
+//        cb0.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent itemEvent) {
+//                System.out.println("JCheckbox0 : "+cb0.isSelected());
+//            }
+//        });
+//        cb1.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent itemEvent) {
+//                System.out.println("JCheckbox1 : "+cb1.isSelected());
+//            }
+//        });
 
         panel.add(lb0);
         panel.add(bt0);
@@ -100,7 +94,7 @@ public class GUI2_Components {
         panel.add(tf0);
         panel.add(ta0);
         panel.add(cbox0);
-//        panel.add(lbResult);
+        panel.add(lbResult);
 
         frame.add(panel);
 
@@ -108,5 +102,20 @@ public class GUI2_Components {
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private static void showResult(JLabel lb0, JButton bt0, JCheckBox cb0, JCheckBox cb1, JRadioButton rb0, JRadioButton rb1, JTextField tf0, JTextArea ta0, JComboBox<String> cbox0, JLabel lbResult) {
+        String result = "";
+        result += lb0.getText();
+        result += bt0.getText();
+        result += cb0.isSelected();
+        result += cb1.isSelected();
+        result += rb0.isSelected();
+        result += rb1.isSelected();
+        result += tf0.getText();
+        result += ta0.getText();
+        result += cbox0.getSelectedIndex();
+        result += cbox0.getSelectedItem();
+        lbResult.setText(result);
     }
 }
