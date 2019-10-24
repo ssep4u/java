@@ -11,7 +11,8 @@ public class GUI11_주민번호테스터 {
         JPanel panel = new JPanel();
         JTextField tf0 = new JTextField(10);
         JLabel lb = new JLabel("-");
-        JTextField tf1 = new JTextField(10);
+        JPasswordField pf = new JPasswordField(10);
+//        JTextField tf1 = new JTextField(10);
 //        JButton btTest = new JButton("테스트");
 
 //        btTest.addActionListener(new ActionListener() {
@@ -29,16 +30,16 @@ public class GUI11_주민번호테스터 {
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
                 if (tf0.getText().length() == 6) {
-                    tf1.requestFocus();
+                    pf.requestFocus();
                 }
             }
         });
-        tf1.addKeyListener(new KeyAdapter() {
+        pf.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-                if (tf1.getText().length() == 7) {
-                    if (isGood(tf0.getText() + tf1.getText())) {
+                if (pf.getPassword().length == 7) {
+                    if (isGood(tf0.getText() + new String(pf.getPassword()))) {
                         lb.setText("O");
                     } else {
                         lb.setText("X");
@@ -49,7 +50,7 @@ public class GUI11_주민번호테스터 {
 
         panel.add(tf0);
         panel.add(lb);
-        panel.add(tf1);
+        panel.add(pf);
 //        panel.add(btTest);
         frame.add(panel);
 
@@ -60,6 +61,7 @@ public class GUI11_주민번호테스터 {
     }
 
     private static boolean isGood(String s) {
+        System.out.println(s);
         int[] testNumber = {2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5};
         int sum = 0;
         for (int i = 0; i < s.length()-1; i++) {
