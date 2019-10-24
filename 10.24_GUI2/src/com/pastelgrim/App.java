@@ -5,14 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class App {
-    private JButton btMsg;
     private JPanel panel;
+    private JLabel lbHello;
+    private JButton btHello;
+    private JTextField tfName;
 
     public App() {
-        btMsg.addActionListener(new ActionListener() {
+        btHello.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hello, World!");
+                String greeting = "Hello " + tfName.getText();
+                lbHello.setText(greeting);
             }
         });
     }
