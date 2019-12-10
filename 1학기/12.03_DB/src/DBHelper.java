@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBHelper {
   //데이터베이스 접속에 필요한 정보
@@ -8,6 +9,7 @@ public class DBHelper {
   private static final String charset = "utf8";
   private static final String username = "root";
   private static final String password = "mirim2";
+  ArrayList<t1> t1List = new ArrayList<>();
 
   //접속 처리를 위한 객체 선언
   private Connection conn = null;
@@ -60,18 +62,37 @@ public class DBHelper {
     }
     conn = null;
   }
-  public ResultSet select() {
+
+  public ArrayList<t1> select() {
     String sql = "SELECT * FROM t1;";
     Statement stmt = null;
     ResultSet rs = null;
     try {
       stmt = conn.createStatement();
       rs = stmt.executeQuery(sql);
+      while (rs.next()) {
+        t1 newT1 = new t1();
+        newT1.setName(rs.getString("name"));
+        newT1.setMonth(rs.getInt("month"));
+        newT1.setDay(rs.getInt("day"));
+        newT1.setBirth_option(rs.getString("birth_option"));
+        newT1.setPhone(rs.getString("phone"));
+        newT1.setGroup1(rs.getInt("group1"));
+        newT1.setGroup2(rs.getInt("group2"));
+        newT1.setGroup3(rs.getInt("group3"));
+        newT1.setGroup4(rs.getInt("group4"));
+        t1List.add(newT1);
+      }
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return rs;
+
+    return t1List;
   }
+  public int insert(t1 item) {
+    insert(item.getName(), item.getMonth(), item.getDay(), item.getBirth_option(), item.getPhone(), item.getGroup1(), item.getGroup2(), item.getGroup3(), item.getGroup4());
+  }
+
   public int insert(String name, int month, int day, String birth_option, String phone, int group1, int group2, int group3, int group4) {
     int result = 0;
     String sql = "insert into t1 values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
